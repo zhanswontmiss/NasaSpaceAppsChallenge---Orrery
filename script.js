@@ -1,29 +1,56 @@
-function rotatePlanet(planetClass, orbitTime, offsetX = 0, offsetY = 0) {
-    const planet = document.querySelector(planetClass);
-    let angle = 0;
-  
-    function updatePosition() {
-      angle = (angle + 3.6 / orbitTime) % 360;
-      const radians = (angle * Math.PI) / 180;
-      const radius = planet.parentElement.offsetWidth / 2;
-      const x = Math.cos(-radians) * radius + offsetX;
-      const y = Math.sin(-radians) * radius + offsetY;
-  
-      planet.style.transform = `translate(${x}px, ${y}px)`;
-      requestAnimationFrame(updatePosition);
-    }
-  
-    updatePosition();
-}
-  
-rotatePlanet('.mercury', 88);  // Mercury orbit time (in Earth days)
-rotatePlanet('.venus', 225);   // Venus orbit time
-rotatePlanet('.earth', 365);   // Earth orbit time
-rotatePlanet('.mars', 687);    // Mars orbit time
+const orbitalPeriods = {
+  mercury: 88,
+  venus: 225,
+  earth: 365,
+  mars: 687,
+  bennu: 448,
+  didymos: 771,
+  ryugu: 475
+};
 
-rotatePlanet('.bennu', 438, -20, -26); 
-rotatePlanet('.didymos', 771, -35, -52);
-rotatePlanet('.ryugu', 475, -25, -30);
+// Function to calculate and update the planet's position over time
+function movePlanet(planetClass, semiMajorAxisAU, orbitalPeriod, orbitCenterX = 0, orbitCenterY = 0) {
+  const planet = document.querySelector(planetClass);
+  let angle = 0;  // Initial angle
+
+  function updatePosition() {
+
+      // Calculate the current time in days (scaled for faster simulation)
+      const time = (Date.now() / 10000) % orbitalPeriod;
+    
+      // Calculate the angle of the planet along its orbit
+      angle = (time / orbitalPeriod) * 2 * Math.PI;
+
+      // Calculate the X and Y positions in AU
+      const xAU = Math.cos(-angle) * semiMajorAxisAU;
+      const yAU = Math.sin(-angle) * semiMajorAxisAU ;
+    
+      // Scale factor to convert AU to pixels
+      const scaleFactor = 1500
+      const xPos = xAU * scaleFactor + orbitCenterX;
+      const yPos = yAU * scaleFactor + orbitCenterY;
+
+      // Apply the new position to the planet
+      planet.style.transform = `translate(${xPos}px, ${yPos}px)`;
+      
+      // Request the next frame for smooth animation
+      requestAnimationFrame(updatePosition);
+  }
+
+  // Start the animation
+  updatePosition()
+  }
+
+
+// Move each planet using its orbital period and distance (semi-major axis in AU)
+movePlanet('.mercury', 0.387, orbitalPeriods.mercury);
+movePlanet('.venus', 0.723, orbitalPeriods.venus);
+movePlanet('.earth', 1.000, orbitalPeriods.earth);
+movePlanet('.mars', 1.524, orbitalPeriods.mars);
+
+movePlanet('.bennu', 1.066, orbitalPeriods.bennu);
+movePlanet('.didymos', 1.400, orbitalPeriods.didymos);
+movePlanet('.ryugu', 1.133, orbitalPeriods.ryugu);
 
 let scale = 1;
 let lastX = 0, lastY = 0;

@@ -152,7 +152,7 @@ let hasRun = false;
 let shouldStop = false;
 const sun_element = document.getElementById("info");
 const sun_text = "Sun is the star at the center of the Solar System. It is a massive, nearly perfect sphere of hot plasma, heated to incandescence by nuclear fusion reactions in its core, radiating the energy from its surface mainly as visible light and infrared radiation with 10% at ultraviolet energies..";
-function typer(element, text, speed = 50, cursorBlink = true) {
+function typer(element, text, speed = 200, cursorBlink = true) {
   let i = 0;
   if (shouldStop) {
     console.log('Function stopped');
@@ -248,4 +248,58 @@ function view_updater(){
     }, 500);
     requestAnimationFrame(view_updater);
   }
+}
+
+const chatContainer = document.getElementById('chat-container');
+const chatToggle = document.getElementById('chat-toggle');
+const sendBtn = document.getElementById('send-btn');
+const chatInput = document.getElementById('chat-input');
+const chatMessages = document.getElementById('chat-messages');
+
+chatToggle.addEventListener('click', () => {
+    chatContainer.classList.toggle('chat-hidden');
+    chatContainer.classList.toggle('chat-visible');
+});
+
+sendBtn.addEventListener('click', async () => {
+    const message = chatInput.value.trim();
+    if (message) {
+        // Отобразить сообщение пользователя
+        const userMessageElement = document.createElement('div');
+        userMessageElement.textContent = `User: ${message}`;
+        chatMessages.appendChild(userMessageElement);
+
+        // Отправка сообщения GPT
+        const response = await sendToGPT(message);
+        
+        // Отобразить сообщение от GPT
+        const gptMessageElement = document.createElement('div');
+        gptMessageElement.textContent = `GPT: ${response}`;
+        chatMessages.appendChild(gptMessageElement);
+
+        // Очистка поля ввода
+        chatInput.value = '';
+        chatMessages.scrollTop = chatMessages.scrollHeight; // Скролл к последнему сообщению
+    }
+});
+
+// Функция для связи с GPT API
+async function sendToGPT(message) {
+    const apiKey = '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';  
+    const apiUrl = 'https://api.openai.com/v1/chat/completions';
+    
+    const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${apiKey}`
+        },
+        body: JSON.stringify({
+            model: 'gpt-3.5-turbo',
+            messages: [{ role: 'user', content: message }]
+        })
+    });
+
+    const data = await response.json();
+    return data.choices[0].message.content;
 }

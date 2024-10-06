@@ -141,8 +141,8 @@ sun_div.addEventListener("mouseenter", function() {
     hasRun = true; 
   } else {
     console.log("This function called twice");
-    sun_element.textContent = '';
-    typer(sun_element, sun_text, 50);
+    // sun_element.textContent = '';
+    // typer(sun_element, sun_text, 50);
   }
 });
 sun_div.addEventListener("mouseleave", function() {

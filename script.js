@@ -285,7 +285,7 @@ sendBtn.addEventListener('click', async () => {
 
 // Функция для связи с GPT API
 async function sendToGPT(message) {
-    const apiKey = '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';  
+    const apiKey = process.env.API_KEY;  
     const apiUrl = 'https://api.openai.com/v1/chat/completions';
     
     const response = await fetch(apiUrl, {

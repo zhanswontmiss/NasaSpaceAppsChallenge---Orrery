@@ -9,7 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
 </head>
 <body>
-    <div class=".main"></div>
+    <div class="main"></div>
     <div id="nav-bar">
         <input id="nav-toggle" type="checkbox"/>
         <div id="nav-header"><a id="nav-title" target="_blank"><i class="fab fa-codepen"></i>Solar System</a>
@@ -26,15 +26,15 @@
         </div>
       </div>
     <div id="container">
-        <div id="content">
+        <div id="content" class="contents">
             <div class="inner-solar-system">
-                <div class="orbit mercury-orbit">
+                <div class="orbit mercury-orbit" id="mercury-orbit">
                     <div class="planet mercury"></div>
                 </div>
-                <div class="orbit venus-orbit">
+                <div class="orbit venus-orbit" id="venus-orbit">
                     <div class="planet venus"></div>
                 </div>
-                <div class="orbit earth-orbit">
+                <div class="orbit earth-orbit" id="earth-orbit">
                     <div class="planet earth"></div>
                 </div>
 
@@ -48,7 +48,7 @@
                     <div class="asteroid ryugu"></div>
                 </div>
 
-                <div class="orbit mars-orbit">
+                <div class="orbit mars-orbit" id="mars-orbit">
                     <div class="planet mars"></div>
                 </div>
                 <div class="sun" id="sun">
@@ -58,6 +58,13 @@
             </div>
         </div>
     </div>
+    <div class="bottom_menu">
+        <input type="radio" id="topview" name="perspective" checked="checked"/>
+        <input type="radio" id="isometric" name="perspective"/>
+        <input type="radio" id="threedee" name="perspective"/>
+    </div>
     <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
 </body>
 </html>

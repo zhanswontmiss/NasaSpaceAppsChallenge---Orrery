@@ -2,16 +2,8 @@
     color: white;
     font-size: 24px;
     white-space: pre-wrap;
-    border-right: 2px solid white; /* Cursor effect */
+    /* border-right: 2px solid white; Cursor effect */
     overflow-wrap: break-word;
-}
-@keyframes blink {
-    0% { border-color: white; }
-    50% { border-color: transparent; }
-    100% { border-color: #ffffff; }
-}
-.sun {
-    animation: blink 1s step-end infinite;
 }
 #sideMenu {
     height: 100%; /* Full height */
@@ -115,6 +107,10 @@ body {
     position: relative;
     width: 1000px;
     height: 1000px;
+    /* transform-style: preserve-3d;
+  perspective: 800px;
+  perspective-origin: center;
+  transform: rotateX(60deg) rotateY(0deg) rotateZ(45deg); */
 }
 
 .sun {
@@ -195,6 +191,7 @@ body {
     margin-left: -10px;
     background-size: cover;
     border-radius: 50%;
+    transform-style: preserve-3d;
 }
 .mercury {
     background-image: url('images/mercury.png');

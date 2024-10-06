@@ -1,3 +1,72 @@
+.sun {
+    color: white;
+    font-size: 24px;
+    white-space: pre-wrap;
+    border-right: 2px solid white; /* Cursor effect */
+    overflow-wrap: break-word;
+}
+@keyframes blink {
+    0% { border-color: white; }
+    50% { border-color: transparent; }
+    100% { border-color: #ffffff; }
+}
+.sun {
+    animation: blink 1s step-end infinite;
+}
+#sideMenu {
+    height: 100%; /* Full height */
+    width: 250px; /* Default width */
+    position: fixed; /* Fixed position on the left side */
+    top: 0;
+    left: 0;
+    background-color: #333; /* Dark background */
+    padding-top: 20px; /* Padding at the top */
+    transition: 0.3s; /* Smooth transition */
+    overflow-x: hidden; /* Disable horizontal scrolling */
+}
+
+/* Menu items inside the side menu */
+#sideMenu a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+}
+
+#sideMenu a:hover {
+    background-color: #575757;
+}
+
+/* Style for the close button */
+#sideMenu .closeBtn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    background-color: #444;
+    cursor: pointer;
+}
+
+/* Shift the menu out of view when hidden */
+.menuHidden {
+    display: none;
+}
+
+/* Content on the page, shift right when menu is open */
+#mainContent {
+    margin-left: 250px; /* Make room for the side menu */
+    padding: 20px;
+    transition: 0.3s;
+}
+
+/* Adjust content position when menu is hidden */
+.contentShift {
+    margin-left: 0;
+}
+
+
 body {
     margin: 0;
     display: flex;
@@ -55,7 +124,15 @@ body {
     background-image: url(images/sun.png);
     background-size: cover;
     border-radius: 50%;
-}  
+}
+.info {
+    top: -30px;
+    left: -80px;
+    width: 700px;
+    position: absolute;
+    /* border: 1px solid white; */
+    display: flex;
+}
 .orbit {
     position: absolute;
     top: 50%;

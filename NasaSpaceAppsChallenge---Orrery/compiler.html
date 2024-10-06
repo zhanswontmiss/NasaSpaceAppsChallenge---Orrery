@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Read Excel with SheetJS</title>
+</head>
+<body>
+    <h2>Upload and Read Excel File</h2>
+    <input type="file" id="upload" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script>
+        document.getElementById('upload').addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = (e) => {
+                const data = new Uint8Array(e.target.result);
+                const workbook = XLSX.read(data, { type: 'array' });
+
+                // Read the first sheet of the workbook
+                const firstSheetName = workbook.SheetNames[0];
+                const worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON
+                const jsonData = XLSX.utils.sheet_to_json(worksheet);
+
+                // Extract the required fields
+                const extractedData = jsonData.map(row => ({
+                    name: row["Name - "],
+                    shortInfo: row["Short Information "],
+                    type: row["Type: "],
+                    diameter: row["Diameter"],
+                    mass: row["Mass"],
+                    size: row["Size"],
+                    temperature: row["Temperature"],
+                    composition: row["Composition"],
+                    date: row["Discovery Date"],
+                    photo: row["Photo of object"]
+                }));
+
+                // Store data in a constant variable
+                const celestialData = extractedData;
+
+                // Log to console or use in your application
+                console.log(celestialData);
+            };
+
+            reader.readAsArrayBuffer(file);
+        });
+    </script>
+</body>
+</html>

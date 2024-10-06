@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="menu.css">
+    <title>Solar System Orrery</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+</head>
+<body>
+    <div class="main"></div>
+    <div id="nav-bar">
+        <input id="nav-toggle" type="checkbox"/>
+        <div id="nav-header"><a id="nav-title" target="_blank"></i>Solar System</a>
+          <label for="nav-toggle"><span id="nav-toggle-burger"></span></label>
+          <hr/>
+        </div>
+        <div id="nav-content">
+          <div class="nav-button" id="sun_btn"><img src="images/sun.png" class="fas"><span>Sun</span></div>
+          <div class="nav-button" id="mercury_btn"><img src="images/mercury.png" class="fas"><span>Mercury</span></div>
+          <div class="nav-button" id="venus_btn"><img src="images/venus.png" class="fas"><span>Venus</span></div>
+          <div class="nav-button" id="earth_btn"><img src="images/earth.png" class="fas"><span>Earth</span></div>
+          <div class="nav-button" id="mars_btn"><img src="images/mars.png" class="fas"><span>Mars</span></div>
+          <div id="nav-content-highlight"></div>
+        </div>
+      </div>
+    <div id="container">
+        <div id="content" class="contents">
+            <div class="inner-solar-system">
+                <div class="orbit mercury-orbit" id="mercury-orbit">
+                    <div class="planet mercury"></div>
+                </div>
+                <div class="orbit venus-orbit" id="venus-orbit">
+                    <div class="planet venus"></div>
+                </div>
+                <div class="orbit earth-orbit" id="earth-orbit">
+                    <div class="planet earth"></div>
+                </div>
+
+                <div class="orbit bennu-orbit">
+                    <div class="asteroid bennu"></div>
+                </div>
+                <div class="orbit didymos-orbit">
+                    <div class="asteroid didymos"></div>
+                </div>
+                <div class="orbit ryugu-orbit">
+                    <div class="asteroid ryugu"></div>
+                </div>
+
+                <div class="orbit mars-orbit" id="mars-orbit">
+                    <div class="planet mars"></div>
+                </div>
+                <div class="sun" id="sun">
+                    <div class="info" id="info">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom_menu">
+        <input type="radio" id="topview" name="perspective" checked="checked"/>
+        <input type="radio" id="isometric" name="perspective"/>
+        <input type="radio" id="threedee" name="perspective"/>
+    </div>
+    
+    <!-- GPT Chat Integration -->
+<div id="chat-container" class="chat-hidden">
+    <div id="chat-header">GPT Chat</div>
+    <div id="chat-body">
+        <div id="chat-messages"></div>
+    </div>
+    <div id="chat-input-container">
+        <input type="text" id="chat-input" placeholder="Type your message here..." />
+        <button id="send-btn">Send</button> <!-- Кнопка отправки -->
+    </div>
+</div>
+<button id="chat-toggle">Chat with GPT</button>
+
+    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+</body>
+</html>
